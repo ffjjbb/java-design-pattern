@@ -1,0 +1,272 @@
+package com.fanjiabao.design.pattern.structural.proxy.cglib_dynamic_prox;
+
+import com.fanjiabao.design.pattern.structural.proxy.cglib_dynamic_prox.CGLIBTrainStation;
+import java.lang.reflect.Method;
+import net.sf.cglib.core.ReflectUtils;
+import net.sf.cglib.core.Signature;
+import net.sf.cglib.proxy.Callback;
+import net.sf.cglib.proxy.Factory;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
+
+public class CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b
+// 直接继承目标类
+extends CGLIBTrainStation
+implements Factory {
+    private boolean CGLIB$BOUND;
+    public static Object CGLIB$FACTORY_DATA;
+    private static final ThreadLocal CGLIB$THREAD_CALLBACKS;
+    private static final Callback[] CGLIB$STATIC_CALLBACKS;
+    private MethodInterceptor CGLIB$CALLBACK_0;
+    private static Object CGLIB$CALLBACK_FILTER;
+    private static final Method CGLIB$sell$0$Method;
+    private static final MethodProxy CGLIB$sell$0$Proxy;
+    private static final Object[] CGLIB$emptyArgs;
+    private static final Method CGLIB$equals$1$Method;
+    private static final MethodProxy CGLIB$equals$1$Proxy;
+    private static final Method CGLIB$toString$2$Method;
+    private static final MethodProxy CGLIB$toString$2$Proxy;
+    private static final Method CGLIB$hashCode$3$Method;
+    private static final MethodProxy CGLIB$hashCode$3$Proxy;
+    private static final Method CGLIB$clone$4$Method;
+    private static final MethodProxy CGLIB$clone$4$Proxy;
+
+    // 重写售票方法
+    public final void sell() {
+        // 如果有拦截器则走 MethodInterceptor.intercept(), 否则直接执行父类方法
+        MethodInterceptor methodInterceptor = this.CGLIB$CALLBACK_0;
+        if (methodInterceptor == null) {
+            CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+            methodInterceptor = this.CGLIB$CALLBACK_0;
+        }
+        if (methodInterceptor != null) {
+            Object object = methodInterceptor.intercept(this, CGLIB$sell$0$Method, CGLIB$emptyArgs, CGLIB$sell$0$Proxy);
+            return;
+        }
+        super.sell();
+    }
+
+    @Override
+    public void setCallback(int n, Callback callback) {
+        switch (n) {
+            case 0: {
+                this.CGLIB$CALLBACK_0 = (MethodInterceptor)callback;
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void setCallbacks(Callback[] callbackArray) {
+        Callback[] callbackArray2 = callbackArray;
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = this;
+        this.CGLIB$CALLBACK_0 = (MethodInterceptor)callbackArray[0];
+    }
+
+    public static void CGLIB$SET_THREAD_CALLBACKS(Callback[] callbackArray) {
+        CGLIB$THREAD_CALLBACKS.set(callbackArray);
+    }
+
+    public static void CGLIB$SET_STATIC_CALLBACKS(Callback[] callbackArray) {
+        CGLIB$STATIC_CALLBACKS = callbackArray;
+    }
+
+    @Override
+    public Callback getCallback(int n) {
+        MethodInterceptor methodInterceptor;
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+        switch (n) {
+            case 0: {
+                methodInterceptor = this.CGLIB$CALLBACK_0;
+                break;
+            }
+            default: {
+                methodInterceptor = null;
+            }
+        }
+        return methodInterceptor;
+    }
+
+    @Override
+    public Callback[] getCallbacks() {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = this;
+        return new Callback[]{this.CGLIB$CALLBACK_0};
+    }
+
+    public static MethodProxy CGLIB$findMethodProxy(Signature signature) {
+        String string = ((Object)signature).toString();
+        switch (string.hashCode()) {
+            case -508378822: {
+                if (!string.equals("clone()Ljava/lang/Object;")) break;
+                return CGLIB$clone$4$Proxy;
+            }
+            case 1826985398: {
+                if (!string.equals("equals(Ljava/lang/Object;)Z")) break;
+                return CGLIB$equals$1$Proxy;
+            }
+            case 1913648695: {
+                if (!string.equals("toString()Ljava/lang/String;")) break;
+                return CGLIB$toString$2$Proxy;
+            }
+            case 1978249955: {
+                if (!string.equals("sell()V")) break;
+                return CGLIB$sell$0$Proxy;
+            }
+            case 1984935277: {
+                if (!string.equals("hashCode()I")) break;
+                return CGLIB$hashCode$3$Proxy;
+            }
+        }
+        return null;
+    }
+
+    private static final void CGLIB$BIND_CALLBACKS(Object object) {
+        block2: {
+            Object object2;
+            block3: {
+                CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = (CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b)object;
+                if (cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BOUND) break block2;
+                cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BOUND = true;
+                object2 = CGLIB$THREAD_CALLBACKS.get();
+                if (object2 != null) break block3;
+                object2 = CGLIB$STATIC_CALLBACKS;
+                if (CGLIB$STATIC_CALLBACKS == null) break block2;
+            }
+            cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$CALLBACK_0 = (MethodInterceptor)((Callback[])object2)[0];
+        }
+    }
+
+    final String CGLIB$toString$2() {
+        return super.toString();
+    }
+
+    static void CGLIB$STATICHOOK1() {
+        CGLIB$THREAD_CALLBACKS = new ThreadLocal();
+        CGLIB$emptyArgs = new Object[0];
+        Class<?> clazz = Class.forName("com.fanjiabao.design.pattern.structural.proxy.cglib_dynamic_prox.CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b");
+        Class<?> clazz2 = Class.forName("com.fanjiabao.design.pattern.structural.proxy.cglib_dynamic_prox.CGLIBTrainStation");
+        CGLIB$sell$0$Method = ReflectUtils.findMethods(new String[]{"sell", "()V"}, clazz2.getDeclaredMethods())[0];
+        CGLIB$sell$0$Proxy = MethodProxy.create(clazz2, clazz, "()V", "sell", "CGLIB$sell$0");
+        clazz2 = Class.forName("java.lang.Object");
+        Method[] methodArray = ReflectUtils.findMethods(new String[]{"equals", "(Ljava/lang/Object;)Z", "toString", "()Ljava/lang/String;", "hashCode", "()I", "clone", "()Ljava/lang/Object;"}, clazz2.getDeclaredMethods());
+        CGLIB$equals$1$Method = methodArray[0];
+        CGLIB$equals$1$Proxy = MethodProxy.create(clazz2, clazz, "(Ljava/lang/Object;)Z", "equals", "CGLIB$equals$1");
+        CGLIB$toString$2$Method = methodArray[1];
+        CGLIB$toString$2$Proxy = MethodProxy.create(clazz2, clazz, "()Ljava/lang/String;", "toString", "CGLIB$toString$2");
+        CGLIB$hashCode$3$Method = methodArray[2];
+        CGLIB$hashCode$3$Proxy = MethodProxy.create(clazz2, clazz, "()I", "hashCode", "CGLIB$hashCode$3");
+        CGLIB$clone$4$Method = methodArray[3];
+        CGLIB$clone$4$Proxy = MethodProxy.create(clazz2, clazz, "()Ljava/lang/Object;", "clone", "CGLIB$clone$4");
+    }
+
+    // 桥方法
+    final void CGLIB$sell$0() {
+        super.sell();
+    }
+
+    final boolean CGLIB$equals$1(Object object) {
+        return super.equals(object);
+    }
+
+    final Object CGLIB$clone$4() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    final int CGLIB$hashCode$3() {
+        return super.hashCode();
+    }
+
+    public CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b() {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = this;
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b);
+    }
+
+    static {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$STATICHOOK1();
+    }
+
+    public final boolean equals(Object object) {
+        MethodInterceptor methodInterceptor = this.CGLIB$CALLBACK_0;
+        if (methodInterceptor == null) {
+            CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+            methodInterceptor = this.CGLIB$CALLBACK_0;
+        }
+        if (methodInterceptor != null) {
+            Object object2 = methodInterceptor.intercept(this, CGLIB$equals$1$Method, new Object[]{object}, CGLIB$equals$1$Proxy);
+            return object2 == null ? false : (Boolean)object2;
+        }
+        return super.equals(object);
+    }
+
+    public final String toString() {
+        MethodInterceptor methodInterceptor = this.CGLIB$CALLBACK_0;
+        if (methodInterceptor == null) {
+            CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+            methodInterceptor = this.CGLIB$CALLBACK_0;
+        }
+        if (methodInterceptor != null) {
+            return (String)methodInterceptor.intercept(this, CGLIB$toString$2$Method, CGLIB$emptyArgs, CGLIB$toString$2$Proxy);
+        }
+        return super.toString();
+    }
+
+    public final int hashCode() {
+        MethodInterceptor methodInterceptor = this.CGLIB$CALLBACK_0;
+        if (methodInterceptor == null) {
+            CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+            methodInterceptor = this.CGLIB$CALLBACK_0;
+        }
+        if (methodInterceptor != null) {
+            Object object = methodInterceptor.intercept(this, CGLIB$hashCode$3$Method, CGLIB$emptyArgs, CGLIB$hashCode$3$Proxy);
+            return object == null ? 0 : ((Number)object).intValue();
+        }
+        return super.hashCode();
+    }
+
+    protected final Object clone() throws CloneNotSupportedException {
+        MethodInterceptor methodInterceptor = this.CGLIB$CALLBACK_0;
+        if (methodInterceptor == null) {
+            CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$BIND_CALLBACKS(this);
+            methodInterceptor = this.CGLIB$CALLBACK_0;
+        }
+        if (methodInterceptor != null) {
+            return methodInterceptor.intercept(this, CGLIB$clone$4$Method, CGLIB$emptyArgs, CGLIB$clone$4$Proxy);
+        }
+        return super.clone();
+    }
+
+    @Override
+    public Object newInstance(Callback[] callbackArray) {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(callbackArray);
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = new CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b();
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(null);
+        return cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b;
+    }
+
+    @Override
+    public Object newInstance(Class[] classArray, Object[] objectArray, Callback[] callbackArray) {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b;
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(callbackArray);
+        Class[] classArray2 = classArray;
+        switch (classArray.length) {
+            case 0: {
+                cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = new CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b();
+                break;
+            }
+            default: {
+                throw new IllegalArgumentException("Constructor not found");
+            }
+        }
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(null);
+        return cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b;
+    }
+
+    @Override
+    public Object newInstance(Callback callback) {
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(new Callback[]{callback});
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b = new CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b();
+        CGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b.CGLIB$SET_THREAD_CALLBACKS(null);
+        return cGLIBTrainStation$$EnhancerByCGLIB$$fe66fc1b;
+    }
+}
