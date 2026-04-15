@@ -37,7 +37,12 @@ public class CGLIBProxyFactory implements MethodInterceptor {
      * @param args 实际参数
      * @param methodProxy 代理对象中的方法的 method 实例
      */
-    public CGLIBTrainStation intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+    @Override
+    public CGLIBTrainStation intercept(Object o,
+                                       Method method,
+                                       Object[] args,
+                                       MethodProxy methodProxy
+    ) throws Throwable {
         // 前置增强
         System.out.println("代理点收取一些服务费用(JDK动态代理方式)");
         // method.invoke 使用反射-慢, methodProxy.invokeSuper 直接调用字节码-快
