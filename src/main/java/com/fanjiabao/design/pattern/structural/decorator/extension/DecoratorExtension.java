@@ -20,15 +20,24 @@ public class DecoratorExtension {
      *  - 具体组件(ConcreteComponent): FileWriter
      *  - 装饰者(Decorator): BufferedWriter
      * <p>
-     * 执行流程:
-     *  1.new BufferedWriter(fw)
-     *      --> 内部持有 FileWriter(this.out = fw)
-     *  2.bw.write("hello Buffered")
-     *      --> 先写入 BufferedWriter 内部缓冲区(char[])
-     *  3.bw.close()
-     *      --> 触发 flushBuffer()
-     *      --> 调用 out.write(...)(即 FileWriter)
-     *      --> 数据真正写入文件
+     * 调用流程:
+     *  1.创建装饰者
+     *      BufferedWriter bw = new BufferedWriter(fw);
+     *          --> 内部持有 FileWriter(this.out = fw;) => BufferedWriter.java:98
+     *  2.写入数据
+     *      bw.write("hello Buffered");
+     *          // 进入 Writer.write(String), String → char[](字符数组转换, 用于复用, 避免频繁创建小数组)
+     *          --> cbuf = writeBuffer; => Writer.java:285
+     *          --> str.getChars(off, (off + len), cbuf, 0); => Writer.java:289
+     *          --> write(cbuf, 0, len); => Writer.java:290(通过多态调用 BufferedWriter.write(char[], off, len))
+     *          --> public void write(char cbuf[], int off, int len) {...} => BufferedWriter.java:169
+     *              // 写入缓冲区
+     *              --> System.arraycopy(cbuf, b, cb, nextChar, d); => BufferedWriter.java:191
+     *  3.关闭流
+     *      bw.close();
+     *          --> flushBuffer(); => BufferedWriter.java:268
+     *              // 调用 FileWriter 写入文件
+     *              --> out.write(cb, 0, nextChar); => BufferedWriter.java:120
      */
     public static void main(String[] args) throws IOException {
         FileWriter fw = new FileWriter("src/test/resources/DecoratorExtension.log");
