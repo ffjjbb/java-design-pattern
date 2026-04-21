@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.UserMapper">
+
+    <select id="selectUserByPrimaryKey" resultType="com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.MysqlUser">
+        SELECT * FROM user
+        <where>
+            <if test="host != null and host != ''">
+                and Host = #{host}
+            </if>
+            <if test="user != null and user != ''">
+                and User = #{user}
+            </if>
+        </where>
+    </select>
+
+</mapper>
