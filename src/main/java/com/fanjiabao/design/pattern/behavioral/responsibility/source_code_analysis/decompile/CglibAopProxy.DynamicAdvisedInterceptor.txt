@@ -1,0 +1,79 @@
+        package org.springframework.aop.framework;
+
+        import java.io.Serializable;
+        import java.lang.reflect.Method;
+        import java.util.List;
+        import org.springframework.aop.TargetSource;
+        import org.springframework.aop.framework.AdvisedSupport;
+        import org.springframework.aop.framework.AopContext;
+        import org.springframework.aop.framework.AopProxyUtils;
+        import org.springframework.aop.framework.CglibAopProxy;
+        import org.springframework.aop.support.AopUtils;
+        import org.springframework.cglib.proxy.MethodInterceptor;
+        import org.springframework.cglib.proxy.MethodProxy;
+        import org.springframework.lang.Nullable;
+
+        private static class CglibAopProxy.DynamicAdvisedInterceptor
+        implements MethodInterceptor,
+        Serializable {
+            private final AdvisedSupport advised;
+
+            public CglibAopProxy.DynamicAdvisedInterceptor(AdvisedSupport advised) {
+/*687*/         this.advised = advised;
+            }
+
+            /*
+             * Enabled force condition propagation
+             * Lifted jumps to return sites
+             */
+            public boolean equals(@Nullable Object other) {
+/*737*/         if (this == other) return true;
+                if (!(other instanceof CglibAopProxy.DynamicAdvisedInterceptor)) return false;
+/*738*/         CglibAopProxy.DynamicAdvisedInterceptor dynamicAdvisedInterceptor = (CglibAopProxy.DynamicAdvisedInterceptor)other;
+                if (!this.advised.equals(dynamicAdvisedInterceptor.advised)) return false;
+                return true;
+            }
+
+            public int hashCode() {
+/*747*/         return this.advised.hashCode();
+            }
+
+            /*
+             * WARNING - Removed try catching itself - possible behaviour change.
+             */
+            @Override
+            @Nullable
+            public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+/*693*/         Object oldProxy = null;
+/*694*/         boolean setProxyContext = false;
+/*695*/         Object target = null;
+/*696*/         TargetSource targetSource = this.advised.getTargetSource();
+                try {
+                    Object retVal;
+                    Class<?> targetClass;
+                    List<Object> chain;
+/*698*/             if (this.advised.exposeProxy) {
+/*700*/                 oldProxy = AopContext.setCurrentProxy(proxy);
+/*701*/                 setProxyContext = true;
+                    }
+/*710*/             if ((chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass = (target = targetSource.getTarget()) != null ? target.getClass() : null)).isEmpty()) {
+/*715*/                 Object[] argsToUse = AopProxyUtils.adaptArgumentsIfNecessary(method, args);
+						// 调用目标方法, AopUtils.invokeJoinpointUsingReflection() = UserService.test()
+/*716*/                 retVal = AopUtils.invokeJoinpointUsingReflection(target, method, argsToUse);
+                    } else {
+					    // 如果存在责任链, 不会直接执行目标方法, 而是先把 "目标对象 + 方法 + 参数 + 拦截器链" 封装成 CglibMethodInvocation, 然后调用 proceed() 启动责任链
+                        retVal = new CglibAopProxy.CglibMethodInvocation(proxy, target, method, args, targetClass, chain, methodProxy).proceed();
+                    }
+/*722*/             Object object = CglibAopProxy.processReturnType(proxy, target, method, args, retVal);
+/*722*/             return object;
+                }
+                finally {
+/*725*/             if (target != null && !targetSource.isStatic()) {
+/*726*/                 targetSource.releaseTarget(target);
+                    }
+/*728*/             if (setProxyContext) {
+/*730*/                 AopContext.setCurrentProxy(oldProxy);
+                    }
+                }
+            }
+        }

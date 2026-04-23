@@ -1,0 +1,155 @@
+package org.springframework.aop.framework;
+
+        import java.lang.reflect.AccessibleObject;
+        import java.lang.reflect.Method;
+        import java.util.HashMap;
+        import java.util.List;
+        import java.util.Map;
+        import org.aopalliance.intercept.MethodInterceptor;
+        import org.aopalliance.intercept.MethodInvocation;
+        import org.springframework.aop.ProxyMethodInvocation;
+        import org.springframework.aop.framework.AopProxyUtils;
+        import org.springframework.aop.framework.InterceptorAndDynamicMethodMatcher;
+        import org.springframework.aop.support.AopUtils;
+        import org.springframework.core.BridgeMethodResolver;
+        import org.springframework.lang.Nullable;
+
+        public class ReflectiveMethodInvocation
+        implements ProxyMethodInvocation,
+        Cloneable {
+            protected final Object proxy;
+            @Nullable
+            protected final Object target;
+            protected final Method method;
+            protected Object[] arguments;
+            @Nullable
+            private final Class<?> targetClass;
+            @Nullable
+            private Map<String, Object> userAttributes;
+            protected final List<?> interceptorsAndDynamicMethodMatchers;
+            private int currentInterceptorIndex = -1;
+
+            protected ReflectiveMethodInvocation(Object proxy, @Nullable Object target, Method method, @Nullable Object[] arguments, @Nullable Class<?> targetClass, List<Object> interceptorsAndDynamicMethodMatchers) {
+/*112*/         this.proxy = proxy;
+/*113*/         this.target = target;
+/*114*/         this.targetClass = targetClass;
+/*115*/         this.method = BridgeMethodResolver.findBridgedMethod(method);
+/*116*/         this.arguments = AopProxyUtils.adaptArgumentsIfNecessary(method, arguments);
+/*117*/         this.interceptorsAndDynamicMethodMatchers = interceptorsAndDynamicMethodMatchers;
+            }
+
+            public String toString() {
+                StringBuilder sb = new StringBuilder("ReflectiveMethodInvocation: ");
+/*287*/         sb.append(this.method).append("; ");
+/*288*/         if (this.target == null) {
+/*289*/             sb.append("target is null");
+                } else {
+/*292*/             sb.append("target is of class [").append(this.target.getClass().getName()).append(']');
+                }
+/*294*/         return sb.toString();
+            }
+
+            @Override
+            public final Method getMethod() {
+/*144*/         return this.method;
+            }
+
+            @Override
+            public final Object[] getArguments() {
+/*149*/         return this.arguments;
+            }
+
+            @Override
+            public final Object getProxy() {
+/*123*/         return this.proxy;
+            }
+
+            @Override
+            @Nullable
+            public Object proceed() throws Throwable {
+                Object interceptorOrInterceptionAdvice;
+/*162*/         if (this.currentInterceptorIndex == this.interceptorsAndDynamicMethodMatchers.size() - 1) {
+/*163*/             return this.invokeJoinpoint();
+                }
+/*166*/         if ((interceptorOrInterceptionAdvice = this.interceptorsAndDynamicMethodMatchers.get(++this.currentInterceptorIndex)) instanceof InterceptorAndDynamicMethodMatcher) {
+                    Class<?> targetClass;
+                    InterceptorAndDynamicMethodMatcher dm = (InterceptorAndDynamicMethodMatcher)interceptorOrInterceptionAdvice;
+/*171*/             Class<?> clazz = targetClass = this.targetClass != null ? this.targetClass : this.method.getDeclaringClass();
+/*172*/             if (dm.matcher().matches(this.method, targetClass, this.arguments)) {
+/*173*/                 return dm.interceptor().invoke(this);
+                    }
+/*178*/             return this.proceed();
+                }
+/*184*/         return ((MethodInterceptor)interceptorOrInterceptionAdvice).invoke(this);
+            }
+
+            @Nullable
+            protected Object invokeJoinpoint() throws Throwable {
+/*196*/         return AopUtils.invokeJoinpointUsingReflection(this.target, this.method, this.arguments);
+            }
+
+            @Override
+            public MethodInvocation invocableClone() {
+/*210*/         Object[] cloneArguments = this.arguments;
+/*211*/         if (this.arguments.length > 0) {
+/*213*/             cloneArguments = (Object[])this.arguments.clone();
+                }
+/*215*/         return this.invocableClone(cloneArguments);
+            }
+
+            @Override
+            public MethodInvocation invocableClone(Object ... arguments) {
+/*230*/         if (this.userAttributes == null) {
+/*231*/             this.userAttributes = new HashMap<String, Object>();
+                }
+                try {
+/*236*/             ReflectiveMethodInvocation clone = (ReflectiveMethodInvocation)this.clone();
+/*237*/             clone.arguments = arguments;
+/*238*/             return clone;
+                }
+                catch (CloneNotSupportedException ex) {
+                    throw new IllegalStateException("Should be able to clone object of type [" + this.getClass() + "]: " + ex);
+                }
+            }
+
+            public Map<String, Object> getUserAttributes() {
+/*276*/         if (this.userAttributes == null) {
+/*277*/             this.userAttributes = new HashMap<String, Object>();
+                }
+/*279*/         return this.userAttributes;
+            }
+
+            @Override
+            public void setArguments(Object ... arguments) {
+/*154*/         this.arguments = arguments;
+            }
+
+            @Override
+            @Nullable
+            public final Object getThis() {
+/*129*/         return this.target;
+            }
+
+            @Override
+            public void setUserAttribute(String key, @Nullable Object value) {
+/*249*/         if (value != null) {
+/*250*/             if (this.userAttributes == null) {
+/*251*/                 this.userAttributes = new HashMap<String, Object>();
+                    }
+/*253*/             this.userAttributes.put(key, value);
+/*256*/         } else if (this.userAttributes != null) {
+/*257*/             this.userAttributes.remove(key);
+                }
+            }
+
+            @Override
+            @Nullable
+            public Object getUserAttribute(String key) {
+/*265*/         return this.userAttributes != null ? this.userAttributes.get(key) : null;
+            }
+
+            @Override
+            public final AccessibleObject getStaticPart() {
+/*134*/         return this.method;
+            }
+        }
