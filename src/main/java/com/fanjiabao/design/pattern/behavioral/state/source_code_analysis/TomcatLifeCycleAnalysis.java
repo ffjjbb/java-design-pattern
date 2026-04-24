@@ -5,7 +5,7 @@ import org.apache.catalina.LifecycleException;
 /**
  * @author: FanJiaBao
  * @createDate: 2026/4/23 16:16
- * @description: Tomcat 生命周期中的状态模式总:
+ * @description: Tomcat 生命周期中的状态模式:
  *  1.Tomcat 使用 LifecycleState 枚举定义组件状态
  *  2.使用 LifecycleBase 统一管理状态流转
  *  3.子类只实现具体阶段行为(init/start/stop/destroy)
@@ -29,7 +29,6 @@ public class TomcatLifeCycleAnalysis {
      *      --> initInternal(); ==> LifecycleBase.java:127
      *      将状态推进为 INITIALIZED
      *      --> setStateInternal(LifecycleState.INITIALIZED, null, false); ==> LifecycleBase.java:128
-     *  以上代码说明只有 NEW 状态的组件, 才允许初始化
      * 2.执行启动:
      *  -->component.start();
      *      判断当前状态
@@ -55,7 +54,6 @@ public class TomcatLifeCycleAnalysis {
      *              --> throw new LifecycleException(msg);
      *      最终推进到 STARTED
      *      --> setStateInternal(LifecycleState.STARTED, null, false);
-     *  这里体现的状态模式思想, START 动作不是随便能执行的, 必须当前状态允许。而且启动完成前后, 组件会处于不同状态, 每个状态对应不同语义。
      * 3.执行停止:
      *  --> component.stop();
      *      判断当前状态是否允许 stop
@@ -74,7 +72,6 @@ public class TomcatLifeCycleAnalysis {
      *      --> !state.equals(LifecycleState.STOPPING) && !state.equals(LifecycleState.FAILED)
      *      最终推进到 STOPPED
      *      --> setStateInternal(LifecycleState.STOPPED, null, false);
-     *  已启动组件和未启动组件的行为完全不同, 只有处于合适状态的组件, 才能进入停止流程。
      * 4.执行销毁:
      *  --> component.destroy();
      *      判断当前状态是否允许 destroy, 如果组件还在运行, 一般要先 stop
@@ -86,7 +83,6 @@ public class TomcatLifeCycleAnalysis {
      *      --> destroyInternal(); ==> LifecycleBase.java:306
      *      最终变为 DESTROYED
      *      --> setStateInternal(LifecycleState.DESTROYED, null, false);
-     *  组件一旦进入 DESTROYED, 通常表示生命周期终结, 不能再次启动。
      */
     public static void main(String[] args) throws LifecycleException {
         SimpleTomcatComponent component = new SimpleTomcatComponent();

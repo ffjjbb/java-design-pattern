@@ -1,7 +1,5 @@
 package com.fanjiabao.design.pattern.behavioral.command.source_code_analysis;
 
-import com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.MysqlUser;
-import com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.UserMapper;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
