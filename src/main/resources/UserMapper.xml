@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.UserMapper">
+<mapper namespace="com.fanjiabao.design.pattern.common.UserMapper">
 
-    <select id="selectUserByPrimaryKey" resultType="com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.MysqlUser">
+    <select id="selectUserByPrimaryKey" resultType="com.fanjiabao.design.pattern.common.MysqlUser">
         SELECT * FROM user
         <where>
             <if test="host != null and host != ''">
@@ -14,6 +14,11 @@
                 and User = #{user}
             </if>
         </where>
+    </select>
+
+    <select id="selectList" resultType="com.fanjiabao.design.pattern.common.MysqlUser">
+        SELECT * FROM user
+        limit #{page}, #{size}
     </select>
 
 </mapper>

@@ -1,6 +1,8 @@
-package com.fanjiabao.design.pattern.behavioral.command.source_code_analysis;
+package com.fanjiabao.design.pattern.common;
 
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author: FanJiaBao
@@ -10,5 +12,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
     MysqlUser selectUserByPrimaryKey(@Param("host") String host, @Param("user") String user);
+
+    List<MysqlUser> selectList(@Param("page") String page, @Param("size") String size);
 
 }

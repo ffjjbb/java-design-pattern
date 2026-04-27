@@ -1,5 +1,7 @@
 package com.fanjiabao.design.pattern.behavioral.command.source_code_analysis;
 
+import com.fanjiabao.design.pattern.common.MysqlUser;
+import com.fanjiabao.design.pattern.common.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

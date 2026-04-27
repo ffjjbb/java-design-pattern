@@ -1,5 +1,8 @@
 package com.fanjiabao.design.pattern.behavioral.command.source_code_analysis;
 
+import com.fanjiabao.design.pattern.common.MysqlUser;
+import com.fanjiabao.design.pattern.common.UserMapper;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -42,7 +45,7 @@ implements UserMapper {
             m0 = Class.forName("java.lang.Object").getMethod("hashCode", new Class[0]);
             m1 = Class.forName("java.lang.Object").getMethod("equals", Class.forName("java.lang.Object"));
             m2 = Class.forName("java.lang.Object").getMethod("toString", new Class[0]);
-            m3 = Class.forName("com.fanjiabao.design.pattern.behavioral.command.source_code_analysis.UserMapper").getMethod("selectUserByPrimaryKey", Class.forName("java.lang.String"), Class.forName("java.lang.String"));
+            m3 = Class.forName("com.fanjiabao.design.pattern.common.UserMapper").getMethod("selectUserByPrimaryKey", Class.forName("java.lang.String"), Class.forName("java.lang.String"));
 //            return;
         }
         catch (NoSuchMethodException noSuchMethodException) {

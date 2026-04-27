@@ -1,4 +1,4 @@
-package com.fanjiabao.design.pattern.behavioral.command.source_code_analysis;
+package com.fanjiabao.design.pattern.common;
 
 import lombok.Data;
 
