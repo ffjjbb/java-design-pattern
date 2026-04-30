@@ -76,6 +76,11 @@
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
         </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-engine-classic</artifactId>
+            <version>8.44.0.Final</version>
+        </dependency>
     </dependencies>
 
     <build>

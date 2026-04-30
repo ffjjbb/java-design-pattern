@@ -1,0 +1,50 @@
+package rules
+
+import com.fanjiabao.design.pattern.behavioral.interpreter.source_code_analysis.Order;
+
+/**
+ * 规则一：
+ *  如果订单金额 >= 1000，并且用户等级是 VIP，则打 8 折。
+ *
+ *  解释器模式体现：
+ *      Order(amount >= 1000, userLevel == "VIP")
+ *
+ *  这不是普通 Java if。
+ *  它是一段 Drools DSL 规则表达式。
+ *
+ *  Drools 会把它解析成规则模型，然后在 fireAllRules() 时解释 / 匹配执行。
+ */
+rule "VIP订单满1000打8折"
+when
+    $order : Order(amount >= 1000, userLevel == "VIP")
+then
+    $order.setDiscount(0.8);
+    $order.setRemark("命中规则: VIP订单满1000打8折");
+    System.out.println("执行规则: VIP订单满1000打8折");
+end
+
+/**
+ * 规则二：
+ *  普通用户订单满1000，打9折。
+ */
+rule "普通订单满1000打9折"
+when
+    $order : Order(amount >= 1000, userLevel == "NORMAL")
+then
+    $order.setDiscount(0.9);
+    $order.setRemark("命中规则: 普通订单满1000打9折");
+    System.out.println("执行规则: 普通订单满1000打9折");
+end
+
+/**
+ * 规则三：
+ *  订单金额小于1000，不打折。
+ */
+rule "订单未满1000不打折"
+when
+    $order : Order(amount < 1000)
+then
+    $order.setDiscount(1.0);
+    $order.setRemark("命中规则: 订单未满1000不打折");
+    System.out.println("执行规则: 订单未满1000不打折");
+end

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <!--
+        kbase: 知识库, 负责加载 rules 包下面的 DRL 规则文件。
+        packages="rules": 对应 src/main/resources/rules 目录。
+    -->
+    <kbase name="orderKBase" packages="rules">
+        <!--
+            ksession: 规则执行会话。
+            Java 代码里通过 newKieSession("orderKSession") 创建。
+        -->
+        <ksession name="orderKSession"/>
+    </kbase>
+
+</kmodule>
