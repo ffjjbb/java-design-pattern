@@ -17,6 +17,6 @@ public class HouseOwner extends Person {
     }
 
     public void getMessage(String message) {
-        System.out.println("房主 " + name + " 获取到的信息是:  " + message);
+        System.out.println("房主 " + name + " 获取到的信息是: " + message);
     }
 }

@@ -33,7 +33,7 @@ public class MementoPattern {
      *  资源消耗大。
      *      如果要保存的内部状态信息过多或者特别频繁, 将会占用比较大的内存资源。
      */
-    public static void main(String[] args) {}
+    public void prosAndCons() {}
 
 
     /**

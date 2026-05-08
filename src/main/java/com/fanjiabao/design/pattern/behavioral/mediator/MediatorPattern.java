@@ -43,7 +43,7 @@ public class MediatorPattern {
         mediator.setHouseOwner(houseOwner);
 
         tenant.contact("我要租房");
-        houseOwner.contact("我有, 你来");
+        houseOwner.contact("我有, 来");
     }
 
     /**

@@ -3,7 +3,7 @@ package com.fanjiabao.design.pattern.behavioral.strategy;
 /**
  * @author: FanJiaBao
  * @createDate: 2026/4/20 17:15
- * @description: (环境类
+ * @description: (环境类)
  */
 public class SalesMan {
 

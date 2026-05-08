@@ -111,7 +111,7 @@ public class DroolsInterpreterAnalysis {
      *                  --> KieBase kBase = getKieBase(kSessionModel.getKieBaseModel().getName()); ==> KieContainerImpl.java:631
      *                      先从缓存获取 KieBase
      *                      --> KieBase kBase = kBases.get(kBaseName); ==> KieContainerImpl.java:443
-     *                      如果缓存中没有，则创建 KieBase
+     *                      如果缓存中没有, 则创建 KieBase
      *                      --> kBase = createKieBase(kBaseModel, kProject, buildContext, null); ==> KieContainerImpl.java:450
      *                          开始创建 KieBase
      *                          --> private KieBase createKieBase(KieBaseModelImpl kBaseModel, KieProject kieProject, BuildContext buildContext, KieBaseConfiguration conf)
@@ -168,11 +168,10 @@ public class DroolsInterpreterAnalysis {
      *                                      检查事件处理模式
      *                                      --> checkStreamMode(kBaseModel, conf, pkgs);
      *                                          作用:
-     *                                              如果规则中需要 STREAM 模式能力，
-     *                                              但当前 KieBase 配置为 CLOUD 模式，则抛出异常
+     *                                              如果规则中需要 STREAM 模式能力, 但当前 KieBase 配置为 CLOUD 模式, 则抛出异常
      *                                      获取 ClassLoader
      *                                      --> ClassLoader cl = kieProject.getClassLoader();
-     *                                      如果没有传入 KieBaseConfiguration，则创建默认配置
+     *                                      如果没有传入 KieBaseConfiguration, 则创建默认配置
      *                                      --> conf = getKnowledgeBaseConfiguration(kBaseModel, cl);
      *                                      创建 Drools 内部 RuleBase
      *                                      --> InternalRuleBase kBase = RuleBaseFactory.newRuleBase(kBaseModel.getName(), conf);
@@ -186,8 +185,7 @@ public class DroolsInterpreterAnalysis {
      *                                          解释器模式体现:
      *                                              DRL 中的条件表达式:
      *                                                  Order(amount >= 1000, userLevel == "VIP")
-     *                                              已经不再是字符串，
-     *                                              而是被构建成规则模型和运行时匹配结构
+     *                                              已经不再是字符串, 而是被构建成规则模型和运行时匹配结构
      *                                      包装成 KieBase 返回
      *                                      --> return KnowledgeBaseFactory.newKnowledgeBase(kBase); ==> AbstractKieModule.java:222
      *                              KieBase 创建完成后更新 KieModule
@@ -258,9 +256,8 @@ public class DroolsInterpreterAnalysis {
      *                              作用:
      *                                  把 "插入 Order 事实对象" 这件事交给 Rete 网络入口
      *                              注意:
-     *                                  在 Drools 8 中，这里后续不一定同步直接进入 AlphaNode.assertObject。
-     *                                  很多情况下会创建 PropagationEntry.Insert，
-     *                                  放入 PropagationList，等 fireAllRules() 时 flush。
+     *                                  在 Drools 8 中, 这里不一定同步直接进入 AlphaNode.assertObject。
+     *                                  很多情况下会创建 PropagationEntry.Insert, 放入 PropagationList, 等 fireAllRules() 时 flush。
      * 四、执行 fireAllRules（flush 传播队列，匹配规则，执行 then）
      *  触发所有规则
      *      --> int count = kieSession.fireAllRules();
@@ -293,10 +290,6 @@ public class DroolsInterpreterAnalysis {
      *                                                  作用:
      *                                                      根据 ObjectTypeNode 后面的节点结构，
      *                                                      把 Fact 分发给 AlphaNode / BetaNode / LeftInputAdapterNode 等
-     *                                                  重点:
-     *                                                      如果条件被索引优化，
-     *                                                      可能不会明显停在你预期的 AlphaNode.assertObject 断点上。
-     *                                                      Drools 可能通过 CompositeObjectSinkAdapter 的索引结构快速筛选。
      *                                                  字段约束判断
      *                                                  --> AlphaNode.assertObject(...)
      *                                                      作用:
@@ -304,9 +297,6 @@ public class DroolsInterpreterAnalysis {
      *                                                      当前可能判断:
      *                                                          amount >= 1000
      *                                                          userLevel == "VIP"
-     *                                                      注意:
-     *                                                          这个方法不是 insert() 之后必然紧跟着直接调用。
-     *                                                          它通常出现在 fireAllRules() flush 传播队列之后。
      *                                                  条件全部匹配后进入终端节点
      *                                                  --> RuleTerminalNode.assertLeftTuple(...)
      *                                                      作用:

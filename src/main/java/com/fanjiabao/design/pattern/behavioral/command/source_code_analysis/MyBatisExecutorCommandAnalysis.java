@@ -121,7 +121,7 @@ public class MyBatisExecutorCommandAnalysis {
             System.out.println(mapper.getClass());
             // 执行方法(触发命令)
             MysqlUser u = mapper.selectUserByPrimaryKey("localhost", "root");
-            System.out.println(u != null ? u.getUser() : "用户不存在");
+            System.out.println("user: " + (u != null ? u.getUser() : "用户不存在"));
         }
 
         CountDownLatch latch = new CountDownLatch(1);

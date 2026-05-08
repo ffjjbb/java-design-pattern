@@ -29,6 +29,7 @@ public class MediatorStructure extends Mediator {
         this.tenant = tenant;
     }
 
+    @Override
     public void contact(String message, Person person) {
         // 和不同的人沟通
         if(person == houseOwner) {
