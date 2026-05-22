@@ -1,0 +1,11 @@
+server:
+  port: 9090
+
+dubbo:
+  application:
+    name: dubbo-provider
+  registry:
+    address: N/A
+  protocol:
+    name: dubbo
+    port: 20880

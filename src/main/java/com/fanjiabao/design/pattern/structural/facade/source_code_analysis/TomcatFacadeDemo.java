@@ -1,4 +1,4 @@
-package com.fanjiabao.design.pattern.structural.facade.extension;
+package com.fanjiabao.design.pattern.structural.facade.source_code_analysis;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

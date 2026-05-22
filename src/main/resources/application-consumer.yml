@@ -1,0 +1,8 @@
+server:
+  port: 9091
+
+dubbo:
+  application:
+    name: dubbo-consumer
+  registry:
+    address: N/A

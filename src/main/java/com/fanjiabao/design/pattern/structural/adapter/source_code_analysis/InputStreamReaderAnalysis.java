@@ -1,4 +1,4 @@
-package com.fanjiabao.design.pattern.structural.adapter.extension;
+package com.fanjiabao.design.pattern.structural.adapter.source_code_analysis;
 
 import java.io.*;
 

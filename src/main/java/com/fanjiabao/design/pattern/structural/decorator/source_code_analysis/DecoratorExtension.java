@@ -1,4 +1,4 @@
-package com.fanjiabao.design.pattern.structural.decorator.extension;
+package com.fanjiabao.design.pattern.structural.decorator.source_code_analysis;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
