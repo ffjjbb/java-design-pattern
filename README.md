@@ -6,6 +6,65 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
+## 设计模式源码案例总览
+
+| 类型 | 设计模式 | Demo 案例 | 框架源码案例 | 核心类 |
+|---|---|---|---|---|
+| 创建型 | 单例模式 | 饿汉式 / 懒汉式 / 枚举 | Spring Bean 单例作用域 | DefaultSingletonBeanRegistry |
+| 创建型 | 工厂模式 | 咖啡工厂 | Spring BeanFactory | DefaultListableBeanFactory |
+| 创建型 | 原型模式 | 奖状复制（浅克隆/深克隆） | Java 对象克隆 | Object.clone() / 序列化 |
+| 创建型 | 建造者模式 | 自行车组装 | StringBuilder 字符串构建 | StringBuilder |
+| 结构型 | 代理模式 | 静态代理 / JDK / CGLIB | Dubbo RPC | ReferenceBean / InvokerInvocationHandler |
+| 结构型 | 适配器模式 | SD卡适配TF卡 | InputStreamReader 字节流转字符流 | InputStreamReader |
+| 结构型 | 装饰器模式 | 咖啡加料 | Java IO 流装饰 | BufferedInputStream / DataInputStream |
+| 结构型 | 桥接模式 | JDBC 驱动连接 | JDBC 驱动桥接 | Driver / Connection |
+| 结构型 | 外观模式 | 统一配置接口 | Tomcat RequestFacade | RequestFacade |
+| 结构型 | 组合模式 | 文件目录树 | Spring 父子容器 | ApplicationContext |
+| 结构型 | 享元模式 | 五子棋棋子 | Integer 缓存 | IntegerCache |
+| 行为型 | 策略模式 | 支付方式选择 | ThreadPoolExecutor 拒绝策略 | RejectedExecutionHandler |
+| 行为型 | 命令模式 | 遥控器控制 | MyBatis Mapper 代理 | MapperProxy |
+| 行为型 | 责任链模式 | 审批流程 | Spring AOP 切面链 | ReflectiveMethodInvocation |
+| 行为型 | 状态模式 | 订单状态流转 | Tomcat Lifecycle 生命周期 | LifecycleBase |
+| 行为型 | 观察者模式 | 事件监听 | Spring 事件驱动 | ApplicationEventPublisher |
+| 行为型 | 中介者模式 | 聊天室 | Spring MVC DispatcherServlet | DispatcherServlet |
+| 行为型 | 迭代器模式 | 自定义集合遍历 | MyBatis ResultSet 迭代 | DefaultCursor |
+| 行为型 | 访问者模式 | 文件访问 | Spring BeanDefinitionVisitor | BeanDefinitionVisitor |
+| 行为型 | 备忘录模式 | 游戏存档 | Hibernate 脏检查 | PersistenceContext |
+| 行为型 | 解释器模式 | 数学表达式计算 | Drools 规则引擎 | KieSession / AlphaNode |
+| 行为型 | 模板方法模式 | 数据库操作模板 | Spring ApplicationContext | AbstractApplicationContext |
+
+------------------------------------------------------------------------------------------------------------------------
+
+## 目录
+
+- [创建型模式](#创建型模式)
+  - [单例模式](#单例模式)
+  - [工厂模式](#工厂模式)
+  - [原型模式](#原型模式)
+  - [建造者模式](#建造者模式)
+- [结构型模式](#结构型模式)
+  - [代理模式](#代理模式)
+  - [适配器模式](#适配器模式)
+  - [装饰器模式](#装饰器模式)
+  - [桥接模式](#桥接模式)
+  - [外观模式](#外观模式)
+  - [组合模式](#组合模式)
+  - [享元模式](#享元模式)
+- [行为型模式](#行为型模式)
+  - [策略模式](#策略模式)
+  - [命令模式](#命令模式)
+  - [责任链模式](#责任链模式)
+  - [状态模式](#状态模式)
+  - [观察者模式](#观察者模式)
+  - [中介者模式](#中介者模式)
+  - [迭代器模式](#迭代器模式)
+  - [访问者模式](#访问者模式)
+  - [备忘录模式](#备忘录模式)
+  - [解释器模式](#解释器模式)
+  - [模板方法模式](#模板方法模式)
+
+------------------------------------------------------------------------------------------------------------------------
+
 # 创建型模式
 
 
