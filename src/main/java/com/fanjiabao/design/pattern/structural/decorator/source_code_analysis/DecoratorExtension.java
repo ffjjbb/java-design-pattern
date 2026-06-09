@@ -40,7 +40,7 @@ public class DecoratorExtension {
      *              --> out.write(cb, 0, nextChar); => BufferedWriter.java:120
      */
     public static void main(String[] args) throws IOException {
-        FileWriter fw = new FileWriter("src/test/resources/DecoratorExtension.log");
+        FileWriter fw = new FileWriter("log/DecoratorExtension.log");
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write("hello Buffered");
         bw.close();

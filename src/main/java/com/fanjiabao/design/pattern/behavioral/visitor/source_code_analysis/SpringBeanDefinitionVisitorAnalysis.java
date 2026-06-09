@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Bean;
  * 这样 Spring 不需要在 BeanDefinition 内部写死各种字符串解析逻辑, 而是通过访问
  * 者 BeanDefinitionVisitor 把 "数据结构" 和 "访问处理行为" 解耦。
  */
-@SpringBootApplication
+@SpringBootApplication(excludeName = {
+        "org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration"
+})
 public class SpringBeanDefinitionVisitorAnalysis {
 
 

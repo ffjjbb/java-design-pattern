@@ -21,7 +21,9 @@ import org.springframework.context.ConfigurableApplicationContext;
  *          最终执行 update SQL。
  *  所以即使不调用 save(), 只要 Entity 是托管状态, Hibernate 也能通过 loadedState 这个 "备忘录", 动发现对象变化并更新数据库。
  */
-@SpringBootApplication
+@SpringBootApplication(excludeName = {
+        "org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration"
+})
 public class HibernateMementoAnalysisApplication {
 
 
