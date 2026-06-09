@@ -36,12 +36,12 @@ public class LazyPlanTwo implements Serializable {
     public static void main(String[] args) throws Exception {
         LazyPlanTwo instance1 = LazyPlanTwo.getInstance();
         // 序列化到文件
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("lazyTwo.obj"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj/lazyTwo.obj"));
         oos.writeObject(instance1);
         oos.close();
 
         // 从文件反序列化
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("lazyTwo.obj"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj/lazyTwo.obj"));
         LazyPlanTwo instance2 = (LazyPlanTwo) ois.readObject();
         ois.close();
 

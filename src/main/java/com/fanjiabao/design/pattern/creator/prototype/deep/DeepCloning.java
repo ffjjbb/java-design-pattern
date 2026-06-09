@@ -27,11 +27,11 @@ public class DeepCloning {
         stu.setName("樊一");
         citation.setStu(stu);
 
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("DeepPrototypeCitation.obj"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("obj/DeepPrototypeCitation.obj"));
         oos.writeObject(citation);
         oos.close();
 
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("DeepPrototypeCitation.obj"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("obj/DeepPrototypeCitation.obj"));
         DeepPrototypeCitation citationClone = (DeepPrototypeCitation) ois.readObject();
         ois.close();
 
